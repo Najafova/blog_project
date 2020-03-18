@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Page Header -->
+    <header class="masthead" style="background-image: url({{ header.background.url }})">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>{{ header.title }}</h1>
+              <span class="subheading">{{ header.sub_title }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          {% for article in article_list %}
+          <div class="post-preview">
+            <a href="{% url 'detail-article' pk=article.pk %}">
+              <h2 class="post-title">
+                {{ article.title }}
+              </h2>
+            </a>
+            <a>
+              {% if article.sub_title %}
+              <h5 class="post-subtitle">
+                {{ article.sub_title }}
+              </h5>
+              {% endif %}
+            </a>
+            <p class="post-meta">Posted by
+              {{ article.article_author.get_full_name }}
+              on {{ article.posted_on|date:"F d, Y" }}</p>
+          </div>
+          <hr>
+          {% endfor %}
+          <!-- Pager -->
+          <!-- <div class="clearfix">
+            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+{% endblock %}

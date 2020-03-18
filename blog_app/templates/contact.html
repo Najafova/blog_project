@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+    <main class="site-main">
+        <div class="container-fluid no-left-padding no-right-padding contact-section">		
+        </div>
+        <div class="container-fluid no-left-padding no-right-padding page-content">
+            <div class="container">
+                <div class="contact-info">
+                    {% for c in contact %}
+                    <div class="block-title">
+                        <h3>{{ c.title }}</h3>
+                    </div>
+                    <p>{{ c.text }}</p>
+                    {% endfor %}
+                </div>
+                <div class="contact-form">
+                    <form class="row">
+                        <div class="col-md-12 form-group">
+                            {% csrf_token %}
+                    {% for field in form %}
+                    {{ field }}
+                    {% endfor %}
+                        </div>
+                        <!-- <div class="col-md-6 form-group">
+                            <input type="text" class="form-control" placeholder="Your Email (required)" name="contact-email" id="input_email" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" placeholder="Subject" name="contact-subject" id="input_subject">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <textarea class="form-control" placeholder="Your message..." rows="5" name="textarea-message" id="textarea_message"></textarea>
+                        </div> -->
+                        <div class="col-md-12 form-group no-bottom-margin">
+                            <button id="btn_submit" name="submit" class="submit">Göndər</button>
+                        </div>
+                        <!-- <div id="alert-msg" class="alert-msg"></div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

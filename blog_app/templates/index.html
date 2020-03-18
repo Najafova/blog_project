@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="main-container">
+		<main class="site-main">
+			<!-- Slider Section -->
+			<div class="container-fluid no-left-padding no-right-padding slider-section slider-section5">
+				<!-- Container -->
+				<div class="container">
+					<div class="slider-carousel-5">
+						{% for slide in slider_article %}
+						{% if slide.status %}
+						<div class="post-item active">
+							{% if slide.image %}
+							<img src="{{ slide.image_thumbnail_slide.url }}" alt="Slider" />
+							{% else %}
+							<img src="{% static 'add_blog/images/img1.jpg' %}" alt="Slider" />
+							{% endif %}
+							<div class="carousel-caption">
+								<span class="post-category"><a title="{{ slide.category }}">{{ slide.category }}</a></span>
+								<h3><a href="{% url 'detail-article' pk=slide.pk %}" title="{{ slide.title }}">{{ slide.title }}</a></h3>
+								<a href="{% url 'detail-article' pk=slide.pk %}" title="">Ətraflı Oxu</a>
+							</div>
+						</div>
+						{% endif %}
+						{% endfor %}
+
+					</div>
+				</div><!-- Container /- -->
+			</div><!-- Slider Section /- -->
+			
+			<!-- Page Content -->
+			<div class="container-fluid no-left-padding no-right-padding page-content">
+				<!-- Container -->
+				<div class="container">
+					<div class="row">
+						<!-- Content Area -->
+						<div class="col-lg-12 col-md-12 content-area">
+							<!-- Row -->
+							<div class="row">
+								{% for article in article_list %}
+								{% if article.status %}
+								<div class="col-lg-4 col-md-6 col-sm-6">
+									<div class="type-post">
+										<div class="entry-cover">
+											<div class="post-meta">
+												<span class="byline">by <a  title="Indesign">{{ article.article_author.get_full_name }}</a></span>
+												<span class="post-date"><a href="{% url 'detail-article' pk=article.pk %}">{{ article.posted_on|date:"F d, Y" }}</a></span>
+											</div>
+											{% if article.image %}
+											<a href="{% url 'detail-article' pk=article.pk %}"><img src="{{ article.image_thumbnail.url }}" alt="Post" /></a>
+											{% else %}
+											<a href="{% url 'detail-article' pk=article.pk %}"><img src="{% static 'add_blog/images/image.jpg' %}" alt="Post" /></a>
+											{% endif %}
+										</div>
+										<div class="entry-content">
+											<div class="entry-header">	
+												<span class="post-category"><a title="Technology">{{ article.category }}</a></span>
+												<h3 class="entry-title"><a href="{% url 'detail-article' pk=article.pk %}" title="{{ article.title }}">{{ article.title }}</a></h3>
+											</div>								
+											<p>{{ article.sub_title }} ...</p>
+											<a href="{% url 'detail-article' pk=article.pk %}" title="Read More">Ətraflı oxu</a>
+										</div>
+									</div>
+								</div>
+								{% endif %}
+								{% endfor %}
+
+							</div><!-- Row /- -->
+							<!-- Pagination -->
+							<!-- <nav class="navigation pagination">
+								<h2 class="screen-reader-text">Posts navigation</h2>
+								<div class="nav-links">
+									<a class="prev page-numbers" href="#">Previous</a>
+									<span class="page-numbers current">
+										<span class="meta-nav screen-reader-text">Page </span>1
+									</span>
+									<a class="page-numbers" href="#"><span class="meta-nav screen-reader-text">Page </span>2</a>
+									<a class="page-numbers" href="#"><span class="meta-nav screen-reader-text">Page </span>3</a>
+									<a class="page-numbers" href="#"><span class="meta-nav screen-reader-text">Page </span>...</a>
+									<a class="page-numbers" href="#"><span class="meta-nav screen-reader-text">Page </span>6</a>
+									<a class="next page-numbers" href="#">Next</a>
+								</div>
+							</nav> -->
+							<!-- Pagination /- -->
+						</div><!-- Content Area /- -->
+					</div>
+				</div><!-- Container /- -->
+			</div><!-- Page Content /- -->
+		</main>
+	</div>
+    {% endblock %}
+
+
+
+    
+	

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url({% if background %}{{background}}{% else %}{% static 'blog/img/contact-bg.jpg' %}{% endif %})">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        {% if edit  %}
+                            <h1>{{ title }}</h1>
+                        {% else %}
+                            <h1>Yeni blog yarat</h1>
+                        {% endif %}
+                        <span class="subheading"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label style="opacity: 1; margin-bottom: 15px; color: green;">{{ field.label }}</label>
+                                {{ field|add_class:"form-control" }}
+                                {% if field.errors %}
+                                    <p class="help-block text-danger">{% for item in field.errors %}{{ item }}{% endfor %}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                    {% endfor %}
+                    <div id="success"></div>
+                    <div class="form-group">
+                        {% if edit %}
+                            <button type="submit" class="btn btn-primary" id="sendMessageButton">Edit</button>
+                            <input action="action" class="btn btn-danger" onclick="window.history.go(-1); return false;" type="button" value="Back" />
+                        {% else %}
+                            <button type="submit" class="btn btn-primary" id="sendMessageButton">Yarat</button>
+                        {% endif %}
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+{% endblock %}

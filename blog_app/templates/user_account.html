@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+    <main class="site-main">  
+        <!-- Page Content -->
+        <div class="container-fluid no-left-padding no-right-padding page-content blog-paralle-post">
+            <!-- Container -->
+            <div class="container">
+                <!-- Row -->
+                <div class="row">
+                    <!-- Content Area -->
+                    <div class="col-lg-12 col-md-12 content-area">
+                        <!-- Row -->
+                        {% for article in article_list %}
+                        <div class="row">     
+                            <div class="col-12 col-md-12 col-sm-6 blog-paralle">
+                                <div class="type-post">
+                                    <div class="entry-cover">
+                                        <div class="post-meta">
+                                            <span class="byline">by <a title="Indesign">{{ article.article_author.get_full_name }}</a></span>
+                                            <span class="post-date"><a >{{ article.posted_on|date:"F d, Y" }}</a></span>
+                                        </div>
+                                        {% if article.image %}
+                                        <a href="{% url 'detail-article' pk=article.pk %}"><img src="{{ article.image_thumbnail.url }}" alt="Post" /></a>
+                                        {% else %}
+                                        <a href="{% url 'detail-article' pk=article.pk %}"><img src="{% static 'add_blog/images/image.jpg' %}" alt="Post" /></a>
+                                        {% endif %}
+                                        
+                                    </div>
+                                    <div class="entry-content">
+                                        <div class="entry-header">	
+                                            <span class="post-category"><a title="Lifestyle">{{ article.category }}</a></span>
+                                            <h3 class="entry-title"><a href="{% url 'detail-article' pk=article.pk %}" title="Trendy Summer Fashion">{{ article.title }}</a></h3>
+                                        </div>								
+                                        <p>{{ article.sub_title }} ...</p>
+                                        <a href="{% url 'edit-blog' article.pk %}" title="Read More">Redaktə et</a> 
+                                        <span style="opacity: 0.5;">|</span> 
+                                        <a href="" class="btn delete-btn-open" data-target="#myModal" data-toggle="modal" data-title="{{ article.title }}" data-id="{{ article.pk }}">Məqaləni sil</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <a class="delete-btn btn btn-info btn-lg" style="display: none" data-toggle="modal" data-target="#myModal">Open
+                            Small Modal
+                        </a>
+
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <form method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="modal-header">
+                                            <h4 class="modal-title"></h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" class="article_id" name="article_id">
+                                            <p>Məqaləni silmek istediyinizden eminsiniz?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <!-- <button type="submit" class="btn btn-success">Sil</button> -->
+                                            <a class="btn btn-dark" href="{% url 'delete-blog' article.pk %}" role="button">Sil</a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Geri qayıt</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+						{% endfor %}
+                        <!-- Row /- -->
+
+
+                        <!-- Pagination -->
+                        <!-- <nav class="navigation pagination">
+                            <h2 class="screen-reader-text">Posts navigation</h2>
+                            <div class="nav-links">
+                                <a class="prev page-numbers" href="#">Previous</a>
+                                <span class="page-numbers current">
+                                    <span class="meta-nav screen-reader-text">Page </span>1
+                                </span>
+                                <a class="page-numbers" href="#"><span class="meta-nav screen-reader-text">Page </span>2</a>
+                                <a class="page-numbers" href="#"><span class="meta-nav screen-reader-text">Page </span>3</a>
+                                <a class="page-numbers" href="#"><span class="meta-nav screen-reader-text">Page </span>...</a>
+                                <a class="page-numbers" href="#"><span class="meta-nav screen-reader-text">Page </span>6</a>
+                                <a class="next page-numbers" href="#">Next</a>
+                            </div>
+                        </nav> -->
+                        <!-- Pagination /- -->
+
+
+
+                    </div><!-- Content Area -->
+                </div><!-- Row /- -->
+            </div><!-- Container /- -->
+        </div><!-- Page Content /- -->
+    </main>
+</div>
+
+{% endblock %}

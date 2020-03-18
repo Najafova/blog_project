@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+	
+    <main class="site-main">
+        <!-- Page Content -->
+        <div class="container-fluid no-left-padding no-right-padding page-content">
+            <!-- Container -->	
+            <div class="container">
+                <!-- Row -->
+                <div class="row">
+                    <!-- Content Area -->
+                    <div class="col-md-12 content-area">
+                        <!-- Aboute Block -->
+                        	
+                        <div  style="text-align: center;" class="aboute-block">
+                            {% for a in about %}
+                            <img src="{{ a.background.url }}" alt="abouteme"/>
+                            <div class="block-title">
+                                <h3>{{ a.title }}</h3>
+                            </div>
+                            <p>{{ a.text }}</p>
+                            {% endfor %}
+                        </div><!-- Aboute Block /- -->	
+                        
+
+
+                        <!-- Team Section -->	
+                        <!-- <div class="team-section">
+                            <div class="block-title">
+                                <h3>Komanda</h3>
+                            </div>
+                            <div class="team-box">
+                                <img src="assets/images/team1.png" alt="team1"/>
+                                <h4>David Wilde</h4>
+                                <p>To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pursue pain, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.</p>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                </ul>
+                            </div>
+                        </div> -->
+                        <!-- Team Section /- -->
+
+                    </div><!-- Content Area /- -->
+                </div><!-- Row / -->
+            </div><!-- Container /- -->
+        </div><!-- Page Content /- -->
+    </main>
+
+    
+</div>
+
+{% endblock %}

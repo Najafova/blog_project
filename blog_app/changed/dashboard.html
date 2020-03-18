@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url({% static 'blog/img/about-bg.jpg' %})">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        <h1>Dashboard</h1>
+                        <span class="subheading">My articles</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a href="{% url 'add-blog' %}" class="btn btn-info">Yeni article yarat</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 mx-auto">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Operations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                     {% for article in object_list %}
+                        <tr>
+                            <td># {{ article.pk }}</td>
+                            <td>
+                                <img style="width: 300px" src="{% if article.image %}{{ article.image.url }}{% endif %}"
+                                     alt="{{ article.title }}">
+                            </td>
+                            <td>{{ article.title }}</td>
+                            <td>
+                                <a href="{% url 'edit-blog' article.pk %}" class="btn btn-success">Edit</a>
+                                <a href="" class="btn delete-btn-open btn-danger"
+                                   data-title="{{ article.title }}"
+                                   data-id="{{ article.pk }}"
+                                >Delete</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <p>post yoxdur</p>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trigger the modal with a button -->
+    <a class="delete-btn btn btn-info btn-lg" style="display: none" data-toggle="modal" data-target="#myModal">Open
+        Small Modal
+    </a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" class="article_id" name="article_id">
+                        <p>Silmek istediyinizden eminsinizmi ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Beli</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Xeyir</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

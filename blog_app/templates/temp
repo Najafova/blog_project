@@ -1,0 +1,78 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>Şifrəni dəyişdir</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'add_blog/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'add_blog/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'add_blog/css/iofrm-style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'add_blog/css/iofrm-theme22.css' %}">
+</head>
+<body>
+    <div class="form-body without-side">
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <img src="{% static 'add_blog/images/graphic3.svg' %}" alt="">
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Şifrəni dəyiş</h3>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <!-- <input class="form-control" type="password" name="old_password" id="id_old_password" placeholder="Cari şifrə" required="true">
+                            <input class="form-control" type="password" name="new_password1" id="id_new_password1" placeholder="Yeni şifrə" required="true">
+                            <input class="form-control" type="password" name="new_password2" id="id_new_password2" placeholder="Yeni şifrənin təstiqi" required="true"> -->
+                            
+                            {{ form.as_p }}
+
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                {% endfor %}
+                            
+                            <div class="form-button full-width">
+                                <button id="submit" type="submit" class="ibtn btn-forget">Şifrəni yenilə</button>
+                            </div>
+                        </form>
+                    </div>
+                
+
+
+                    <!-- <div class="form-sent">
+                        <div class="tick-holder">
+                            <div class="tick-icon"></div>
+                        </div>
+                        <h3>Şifrə dəyişdirildi</h3>
+                        <p>Please check your inbox <a href="http://brandio.io/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb82848d9986ab82848d99869f8e869b878a9f8ec58284">[email&#160;protected]</a></p>
+                        <div class="info-holder">
+                            <span>Hesabınıza yenidən daxil olun</span>.
+                        </div>
+                    </div> -->
+
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+<script data-cfasync="false" src="http://brandio.io/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="{% static 'add_blog/js/jquery.min.js' %}"></script>
+<script src="{% static 'add_blog/js/popper.min.js' %}"></script>
+<script src="{% static 'add_blog/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'add_blog/js/main.js' %}"></script>
+</body>
+
+</html>

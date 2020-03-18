@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>Sumaks Blog</title>
+	<link rel="icon" type="image/x-icon" href="{% static 'minimag/images/icon.ico' %}" />
+	<link rel="apple-touch-icon-precomposed" href="{% static 'minimag/assets/images/apple-touch-icon-114x114-precomposed.png' %}">
+	<link rel="apple-touch-icon-precomposed" href="{% static 'minimag/assets/images/apple-touch-icon-72x72-precomposed.html' %}">
+	<link rel="apple-touch-icon-precomposed" href="{% static 'minimag/assets/images/apple-touch-icon-57x57-precomposed.png' %}">	
+	<link href="../../../../fonts.googleapis.com/css8896.css?family=Hind:300,400,500,600,700%7cMontserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="{% static 'minimag/assets/css/lib.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'minimag/assets/css/rtl.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'minimag/style.css' %}">
+</head>
+
+<body data-offset="200" data-spy="scroll" data-target=".ownavigation">
+	<div id="site-loader" class="load-complete">
+		<div class="loader">
+			<div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div>
+		</div>
+	</div>
+		
+	<header class="container-fluid no-left-padding no-right-padding header_s header-fix header_s1">
+		<div id="slidepanel-1" class="slidepanel">
+			<div class="container-fluid no-right-padding no-left-padding top-header">
+				<div class="container">	
+					<div class="row">
+						<div class="col-lg-4 col-6">
+							<ul class="top-social">
+								<li><a href="{{ footer.facebook }}" target="_blank" title="Facebook"><i class="ion-social-facebook-outline"></i></a></li>
+								<li><a href="{{ footer.linkedin }}" target="_blank" title="Linkedin"><i class="ion-social-linkedin-outline"></i></a></li>
+								<li><a href="{{ footer.youtube }}" target="_blank" title="Youtube"><i class="ion-social-youtube-outline"></i></a></li>
+							</ul>
+						</div>
+						<div class="col-lg-4 logo-block">
+							<a href="http://sumaks.com/" target="_blank" title="sumaks.com">Sumaks</a>
+						</div>
+						<div class="col-lg-4 col-6">
+							<ul class="top-right user-info">
+								<li class="dropdown">
+									{% if request.user.is_authenticated %}
+									<a class="dropdown-toggle" href=""><i class="pe-7s-user"></i></a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="{% url 'user_account' %}">Məqalələrim</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'add-blog' %}">Məqalə yarat</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'change_password' %}">Şifrəni dəyişdir</a></li>
+										<li><a class="dropdown-item" href="{% url 'logout-view' %}">Hesabdan çıx</a></li>
+									</ul>
+									{% else %}
+									<a class="dropdown-toggle" href=""><i class="pe-7s-user"></i></a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="{% url 'login_view' %}" title="Sign In">Yazar hesabı</a></li>
+										<!-- <li><a class="dropdown-item" href="#" title="Log In">Daxil ol</a></li> -->
+									</ul>
+									{% endif %}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div><!-- Container /- -->
+			</div><!-- Top Header /- -->				
+		</div><!-- SidePanel /- -->
+		
+		<!-- Menu Block -->
+		<div class="container-fluid no-left-padding no-right-padding menu-block">
+			<div class="container">				
+				<nav class="navbar ownavigation navbar-expand-lg">
+					<a class="navbar-brand" target="_blank"  href="http://sumaks.com/">Sumaks</a>
+					<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+						<i class="fa fa-bars"></i>
+					</button>
+					<div class="collapse navbar-collapse" id="navbar1">
+						<ul class="navbar-nav">		
+                            <li><a class="nav-link" title="Blog" href="{% url 'index' %}">Blog</a></li>											
+							<li><a class="nav-link" title="Haqqımızda" href="{% url 'about' %}">Haqqımızda</a></li>
+						</ul>
+					</div>
+					<div id="loginpanel-1" class="desktop-hide">
+						<div class="right toggle" id="toggle-1">
+							<a id="slideit-1" class="slideit" href="#slidepanel"><i class="fo-icons fa fa-inbox"></i></a>
+							<a id="closeit-1" class="closeit" href="#slidepanel"><i class="fo-icons fa fa-close"></i></a>
+						</div>
+					</div>
+				</nav>
+			</div><!-- Container /- -->
+		</div><!-- Menu Block /- -->
+    </header><!-- Header Section /- -->
+    {% block content %}
+    {% endblock %}
+    <footer class="container-fluid no-left-padding no-right-padding footer-main">
+      
+		<div class="container">
+			<ul class="ftr-social">
+				<li><a href="{{ footer.facebook }}" target="_blank" title="Facebook"><i class="fa fa-facebook"></i>Facebook</a></li>
+				<li><a href="{{ footer.linkedin }}" target="_blank" title="Linkedin"><i class="fa fa-linkedin"></i>Linkedin</a></li>
+				<li><a href="{{ footer.youtube }}" target="_blank" title="Youtube"><i class="fa fa-youtube"></i>YouTube</a></li>
+			</ul>
+			<div class="copyright">
+				<p>{{ footer.copyright }}</p>
+			</div>
+        </div>
+ 
+	</footer>
+	<script src="{% static 'minimag/assets/js/jquery-1.12.4.min.js' %}"></script>
+	<script src="{% static 'minimag/assets/js/popper.min.js' %}"></script>
+	<script src="{% static 'minimag/assets/js/lib.js' %}"></script>
+	<script src="{% static 'minimag/assets/js/functions.js' %}"></script>
+	
+</body>
+</html>

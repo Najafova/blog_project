@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="main-container">
+		<main class="site-main">
+			<!-- Page Content -->
+			<div class="container-fluid no-left-padding no-right-padding page-content blog-single post-nosidebar">
+				<!-- Container -->
+				<div class="container">
+					<div class="entry-cover">
+						{% if article.image %}
+						<img style="text-align: center;" src="{{ article.image_thumbnail_detail.url }}" alt="Post" />
+						{% else %}
+						<img style="text-align: center;" src="{% static 'add_blog/images/img1.jpg' %}" alt="Post" />
+						{% endif %}
+						
+					</div>
+					<div class="row" style="text-align: center;">
+						<!-- Content Area -->
+						<div class="col-xl-12 col-lg-12 col-md-12 col-12 content-area">
+							<article class="type-post">
+								<div class="entry-content">
+									<div class="entry-header">	
+										<span class="post-category"><a title="Lifestyle">{{ article.category }}</a></span>
+										<h3 class="entry-title">{{ article.title }}</h3>
+										<div class="post-meta">
+											<span class="byline">by <a title="Indesign">{{ article.article_author.get_full_name }}</a></span>
+											<span class="post-date">{{ article.posted_on|date:"F d, Y" }}</span>
+										</div>
+									</div>								
+									<p>{{ article.body|safe }}</p>
+
+									
+									<div class="entry-footer">
+										<div class="tags">
+											{% for category in categories %}
+											<a title="{{ category.category_name }}"># {{ category.category_name }}</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</article>
+						</div><!-- Content Area /- -->
+					</div>
+				</div><!-- Container /- -->
+			</div><!-- Page Content /- -->
+		</main>
+	</div>
+	{% endblock %}
